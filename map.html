@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="map.css" />
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxpRJ9UJrpb68ONqVvDwmrFA8QnhQPu7w&callback=console.debug&libraries=maps,marker&v=beta">
+    </script>
+    <script src="map.js" defer></script>
+    <title>Carte interactive</title>
+</head>
+
+<body>
+        <gmp-map center="48.864716, 2.349014" zoom="3" map-id="DEMO_MAP_ID">
+            <gmp-advanced-marker position="55.953251, -3.188267" title="Edinburgh"></gmp-advanced-marker>
+            <gmp-advanced-marker position="64.1466, -21.9426" title="Reykjavik"></gmp-advanced-marker>
+            <gmp-advanced-marker position="12.6392, -8.0029" title="Bamako"></gmp-advanced-marker>
+            <gmp-advanced-marker position="40.7128, -74.0060" title="New York"></gmp-advanced-marker>
+        </gmp-map>
+</body>
+</html>
