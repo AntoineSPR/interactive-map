@@ -1,4 +1,5 @@
 let map = document.querySelector("gmp-map");
+let list = document.querySelector(".list");
 
 function loadJSON(callback) {
   let xhr = new XMLHttpRequest();
@@ -14,16 +15,19 @@ function loadJSON(callback) {
 
 loadJSON(function(response) {
   let cities = JSON.parse(response);
-  cities.forEach(function(city) {
+  cities.forEach(city => {
     let marker = document.createElement("gmp-advanced-marker");
     marker.setAttribute("position", `${city.coordinates.lat}, ${city.coordinates.lng}`);
     marker.setAttribute("title", city.name);
     map.appendChild(marker);
-    console.log(city);
+    let listItem = document.createElement("div");
+    listItem.innerHTML = 
+      `<h2>${city.name}</h2> 
+      <p>Latitude : ${city.coordinates.lat}</p>
+      <p>Longitude : ${city.coordinates.lng}</p>`;
+    list.appendChild(listItem);
   });
 });
-
-let list = document.querySelector(".list");
 
 function toggleMap(){ 
   list.style.display = "none";
