@@ -10,9 +10,25 @@ padding: 0;
   display: none;
 }
 
+gmp-advanced-marker {
+  cursor : pointer;
+}
+
 #legend {
   display: none;
   position: absolute;
   background-color: white;
   padding: 5px;
+  width: 200px;
+}
+
+#legend span {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+
+#legend h2 {
+  margin: 0;
 }

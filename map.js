@@ -1,5 +1,6 @@
 let map = document.querySelector("gmp-map");
 let list = document.querySelector(".list");
+let legend = document.getElementById("legend");
 
 function loadJSON(callback) {
   let xhr = new XMLHttpRequest();
@@ -15,12 +16,19 @@ function loadJSON(callback) {
 
 function displayLegend(event, city){
   legend.innerHTML = 
-    `<h2>${city.name}</h2>*
-    <p>Population: ${city.population}</p>`;
+    `<h2>${city.name}</h2>
+    <p>Population: ${city.population}</p>
+    <span>&#10006;</span>`;
   legend.style.display = "block";
   legend.style.left = event.clientX + "px";
   legend.style.top = event.clientY + "px";
+  let cross = document.querySelector("#legend span");
+  cross.addEventListener("click", () => {
+    legend.style.display = "none";
+  })
 }
+
+
 
 loadJSON(function(response) {
   let cities = JSON.parse(response);
