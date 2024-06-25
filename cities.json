@@ -1,38 +1,48 @@
 [
     {
       "name": "Paris",
+      "country": "France",
       "coordinates": {
         "lat": 48.8566,
         "lng": 2.3522
-      }
+      },
+      "population": 2148327
     },
     {
       "name": "Edinburgh",
+      "country": "United Kingdom",
       "coordinates": {
         "lat": 55.9533,
         "lng": -3.1883
-      }
+      },
+      "population": 488050
     },
     {
       "name": "Reykjavik",
+      "country": "Iceland",
       "coordinates": {
         "lat": 64.1466,
         "lng": -21.9426
-      }
+      },
+      "population": 131136
     },
     {
       "name": "Bamako",
+      "country": "Mali",
       "coordinates": {
         "lat": 12.6392,
         "lng": -8.0029
-      }
+      },
+      "population": 2009104
     },
     {
       "name": "New York",
+      "country": "United States",
       "coordinates": {
         "lat": 40.7128,
         "lng": -74.0060
-      }
+      },
+      "population": 8419600
     }
   ]
   

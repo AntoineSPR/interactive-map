@@ -23,8 +23,10 @@ loadJSON(function(response) {
     let listItem = document.createElement("div");
     listItem.innerHTML = 
       `<h2>${city.name}</h2> 
+      <p>Country: ${city.country}</p>
       <p>Latitude : ${city.coordinates.lat}</p>
-      <p>Longitude : ${city.coordinates.lng}</p>`;
+      <p>Longitude : ${city.coordinates.lng}</p>
+      <p>Population: ${city.population}</p>`;
     list.appendChild(listItem);
   });
 });
