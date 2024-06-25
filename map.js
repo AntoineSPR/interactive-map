@@ -22,3 +22,15 @@ loadJSON(function(response) {
     console.log(city);
   });
 });
+
+let list = document.querySelector(".list");
+
+function toggleMap(){ 
+  list.style.display = "none";
+  map.style.display = "block";
+}
+
+function toggleList(){
+  list.style.display = "block";
+  map.style.display = "none";
+}

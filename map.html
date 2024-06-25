@@ -13,7 +13,17 @@
 </head>
 
 <body>
+    <header>
+        <nav>
+            <button onclick="toggleMap()">Carte du monde</button>
+            <button onclick="toggleList()">Liste des villes</button>
+        </nav>
+    </header>
+    <main>
         <gmp-map center="48.864716, 2.349014" zoom="3" map-id="DEMO_MAP_ID">
         </gmp-map>
+        <section class="list">
+        </section>
+    </main>
 </body>
 </html>
