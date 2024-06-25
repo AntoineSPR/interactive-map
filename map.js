@@ -13,6 +13,15 @@ function loadJSON(callback) {
   xhr.send();
 };
 
+function displayLegend(event, city){
+  legend.innerHTML = 
+    `<h2>${city.name}</h2>*
+    <p>Population: ${city.population}</p>`;
+  legend.style.display = "block";
+  legend.style.left = event.clientX + "px";
+  legend.style.top = event.clientY + "px";
+}
+
 loadJSON(function(response) {
   let cities = JSON.parse(response);
   cities.forEach(city => {
@@ -20,6 +29,9 @@ loadJSON(function(response) {
     marker.setAttribute("position", `${city.coordinates.lat}, ${city.coordinates.lng}`);
     marker.setAttribute("title", city.name);
     map.appendChild(marker);
+    marker.addEventListener("click", (event) => 
+      displayLegend(event, city)
+    );
     let listItem = document.createElement("div");
     listItem.innerHTML = 
       `<h2>${city.name}</h2> 

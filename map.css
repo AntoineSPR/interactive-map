@@ -9,3 +9,10 @@ padding: 0;
 .list {
   display: none;
 }
+
+#legend {
+  display: none;
+  position: absolute;
+  background-color: white;
+  padding: 5px;
+}
