@@ -1,0 +1,38 @@
+[
+    {
+      "name": "Paris",
+      "coordinates": {
+        "lat": 48.8566,
+        "lng": 2.3522
+      }
+    },
+    {
+      "name": "Edinburgh",
+      "coordinates": {
+        "lat": 55.9533,
+        "lng": -3.1883
+      }
+    },
+    {
+      "name": "Reykjavik",
+      "coordinates": {
+        "lat": 64.1466,
+        "lng": -21.9426
+      }
+    },
+    {
+      "name": "Bamako",
+      "coordinates": {
+        "lat": 12.6392,
+        "lng": -8.0029
+      }
+    },
+    {
+      "name": "New York",
+      "coordinates": {
+        "lat": 40.7128,
+        "lng": -74.0060
+      }
+    }
+  ]
+  
