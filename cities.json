@@ -1,48 +1,37 @@
 [
-    {
+  {
+      "id": 1,
       "name": "Paris",
       "country": "France",
-      "coordinates": {
-        "lat": 48.8566,
-        "lng": 2.3522
-      },
-      "population": 2148327
-    },
-    {
+      "population": 2140526,
+      "coordinates": { "lat": 48.864716, "lng": 2.349014 }
+  },
+  {
+      "id": 2,
       "name": "Edinburgh",
-      "country": "United Kingdom",
-      "coordinates": {
-        "lat": 55.9533,
-        "lng": -3.1883
-      },
-      "population": 488050
-    },
-    {
+      "country": "UK",
+      "population": 482005,
+      "coordinates": { "lat": 55.953251, "lng": -3.188267 }
+  },
+  {
+      "id": 3,
       "name": "Reykjavik",
       "country": "Iceland",
-      "coordinates": {
-        "lat": 64.1466,
-        "lng": -21.9426
-      },
-      "population": 131136
-    },
-    {
+      "population": 123300,
+      "coordinates": { "lat": 64.135338, "lng": -21.895210 }
+  },
+  {
+      "id": 4,
       "name": "Bamako",
       "country": "Mali",
-      "coordinates": {
-        "lat": 12.6392,
-        "lng": -8.0029
-      },
-      "population": 2009104
-    },
-    {
+      "population": 1965406,
+      "coordinates": { "lat": 12.639232, "lng": -8.002889 }
+  },
+  {
+      "id": 5,
       "name": "New York",
-      "country": "United States",
-      "coordinates": {
-        "lat": 40.7128,
-        "lng": -74.0060
-      },
-      "population": 8419600
-    }
-  ]
-  
+      "country": "USA",
+      "population": 8175133,
+      "coordinates": { "lat": 40.712776, "lng": -74.005974 }
+  }
+]

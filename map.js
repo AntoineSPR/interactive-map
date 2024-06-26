@@ -1,6 +1,7 @@
 let map = document.querySelector("gmp-map");
 let list = document.querySelector(".list");
 let legend = document.getElementById("legend");
+let cities = [];
 
 function loadJSON(callback) {
   let xhr = new XMLHttpRequest();
@@ -8,11 +9,42 @@ function loadJSON(callback) {
   xhr.open('GET', 'cities.json');
   xhr.onreadystatechange = () => {
     if (xhr.readyState === 4 && xhr.status === 200) {
-      callback(xhr.responseText);
+      cities = JSON.parse(xhr.responseText);
+      displayCities();
     }
   }
   xhr.send();
 };
+
+loadJSON();
+
+function displayCities() {
+  list.innerHTML = '';
+  cities.forEach(city => {
+    let marker = document.createElement("gmp-advanced-marker");
+    marker.setAttribute("position", `${city.coordinates.lat}, ${city.coordinates.lng}`);
+    marker.setAttribute("title", city.name);
+    map.appendChild(marker);
+    marker.addEventListener("click", (event) => {
+      displayLegend(event, city);
+      }
+    );
+    let listItem = document.createElement("div");
+    listItem.innerHTML = 
+      `
+      <form id="cityForm${city.id}" onsubmit="handleSubmit(event, ${city.id})">
+      <input type="hidden" id="${city.id}">
+      <h2>${city.name}</h2>
+      <input type="text" id="name${city.id}" value="${city.name}">
+      <input type="submit"> 
+      <p>Country: ${city.country}</p>
+      <p>Latitude : ${city.coordinates.lat}</p>
+      <p>Longitude : ${city.coordinates.lng}</p>
+      <p>Population: ${city.population}</p>
+      </form>`;
+    list.appendChild(listItem);
+  });
+}
 
 function displayLegend(event, city){
   legend.innerHTML = 
@@ -28,29 +60,6 @@ function displayLegend(event, city){
   })
 }
 
-
-
-loadJSON(function(response) {
-  let cities = JSON.parse(response);
-  cities.forEach(city => {
-    let marker = document.createElement("gmp-advanced-marker");
-    marker.setAttribute("position", `${city.coordinates.lat}, ${city.coordinates.lng}`);
-    marker.setAttribute("title", city.name);
-    map.appendChild(marker);
-    marker.addEventListener("click", (event) => 
-      displayLegend(event, city)
-    );
-    let listItem = document.createElement("div");
-    listItem.innerHTML = 
-      `<h2>${city.name}</h2> 
-      <p>Country: ${city.country}</p>
-      <p>Latitude : ${city.coordinates.lat}</p>
-      <p>Longitude : ${city.coordinates.lng}</p>
-      <p>Population: ${city.population}</p>`;
-    list.appendChild(listItem);
-  });
-});
-
 function toggleMap(){ 
   list.style.display = "none";
   map.style.display = "block";
@@ -59,4 +68,15 @@ function toggleMap(){
 function toggleList(){
   list.style.display = "block";
   map.style.display = "none";
+}
+
+function handleSubmit(event, cityId) {
+  event.preventDefault();
+  const name = document.getElementById(`name${cityId}`).value;
+  const cityIndex = cities.findIndex(city => city.id === cityId);
+  cities[cityIndex].name = name;
+  console.log(cities[cityIndex]);
+  localStorage.setItem('cities', JSON.stringify(cities));
+  document.getElementById(`cityForm${cityId}`).reset();
+  displayCities();
 }

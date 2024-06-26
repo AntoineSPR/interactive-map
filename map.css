@@ -32,3 +32,9 @@ gmp-advanced-marker {
 #legend h2 {
   margin: 0;
 }
+
+#cityForm {
+  border: 2px solid black;
+  width: 50vw;
+  margin-bottom: 5px;
+}
