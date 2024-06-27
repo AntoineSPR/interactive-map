@@ -20,6 +20,7 @@ loadJSON();
 
 function displayCities() {
   list.innerHTML = `<h1>Capitales</h1>`;
+  map.innerHTML = '';
 
   cities.forEach(city => {
     let marker = document.createElement("gmp-advanced-marker");
