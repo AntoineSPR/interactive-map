@@ -158,3 +158,24 @@ function deleteCity(cityId) {
   displayCities();
   }
 }
+
+function geolocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const userLocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      } 
+    
+      let userMarker = document.createElement("gmp-advanced-marker");
+      userMarker.setAttribute("position", `${userLocation.lat}, ${userLocation.lng}`);
+      userMarker.setAttribute("title", "Votre position");
+      map.appendChild(userMarker);
+
+      map.setAttribute("center", `${userLocation.lat}, ${userLocation.lng}`);
+      map.setAttribute("zoom", "10");
+    });
+  } else {
+    alert('Votre navigateur ne prend pas en charge la géolocalisation');
+  }
+}

@@ -12,8 +12,13 @@ nav {
   height: 2rem;
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 1.2rem;
   z-index: 1;
+}
+
+#geolocation {
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 
 .list {
