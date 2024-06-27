@@ -23,6 +23,14 @@ function displayCities() {
   map.innerHTML = '';
 
   cities.forEach(city => {
+  addMarkers(city);
+  createList(city);
+});
+
+  addCityForm();
+}
+
+function addMarkers(city) {
     let marker = document.createElement("gmp-advanced-marker");
     marker.setAttribute("position", `${city.coordinates.lat}, ${city.coordinates.lng}`);
     marker.setAttribute("title", city.name);
@@ -31,34 +39,37 @@ function displayCities() {
       displayLegend(event, city);
       }
     );
+}
 
-    let listItem = document.createElement("div");
-    listItem.innerHTML = 
-      `<form id="cityForm${city.id}" onsubmit="editCity(event, ${city.id})">
-      <input type="hidden" id="${city.id}">
-      <h2>${city.name} <span id="delete${city.id}" onclick="deleteCity(${city.id})">&#128465;</span>
-      <input type="text" id="name${city.id}" value="${city.name}">
-      <input type="submit"> 
-      </h2>
-      <p>Pays : ${city.country}
-      <input type="text" id="country${city.id}" value="${city.country}">
-      <input type="submit"> 
-      </p>
-      <p>Latitude : ${city.coordinates.lat}
-      <input type="text" id="lat${city.id}" value="${city.coordinates.lat}"> 
-      <br>
-      Longitude : ${city.coordinates.lng}
-      <input type="text" id="lng${city.id}" value="${city.coordinates.lng}">
-      <input type="submit"> 
-      </p>
-      <p>Population : ${city.population}
-      <input type="text" id="population${city.id}" value="${city.population}">
-      <input type="submit"> 
-      </p>
-      </form>`;
-    list.appendChild(listItem);
-  });
+function createList(city) {
+  let listItem = document.createElement("div");
+  listItem.innerHTML = 
+    `<form id="cityForm${city.id}" onsubmit="editCity(event, ${city.id})">
+    <input type="hidden" id="${city.id}">
+    <h2>${city.name} <span id="delete${city.id}" onclick="deleteCity(${city.id})">&#128465;</span>
+    <input type="text" id="name${city.id}" value="${city.name}">
+    <input type="submit"> 
+    </h2>
+    <p>Pays : ${city.country}
+    <input type="text" id="country${city.id}" value="${city.country}">
+    <input type="submit"> 
+    </p>
+    <p>Latitude : ${city.coordinates.lat}
+    <input type="text" id="lat${city.id}" value="${city.coordinates.lat}"> 
+    <br>
+    Longitude : ${city.coordinates.lng}
+    <input type="text" id="lng${city.id}" value="${city.coordinates.lng}">
+    <input type="submit"> 
+    </p>
+    <p>Population : ${city.population}
+    <input type="text" id="population${city.id}" value="${city.population}">
+    <input type="submit"> 
+    </p>
+    </form>`;
+  list.appendChild(listItem);
+}
 
+function addCityForm() {
   list.innerHTML += 
   `<h3>Ajouter une ville:</h3>
   <form id="newCityForm" onsubmit="addCity(event)">
@@ -74,7 +85,7 @@ function displayCities() {
       <input type="text" id="population" name="population"> <br>
       <input type="submit"> 
   </form>`;
-}
+  }
 
 function displayLegend(event, city){
   legend.innerHTML = 
