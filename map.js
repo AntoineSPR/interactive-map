@@ -99,6 +99,7 @@ function toggleMap(){
 function toggleList(){
   list.style.display = "block";
   map.style.display = "none";
+  legend.style.display = "none";
 }
 
 function editCity(event, cityId) {
