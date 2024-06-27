@@ -36,7 +36,7 @@ function displayCities() {
     listItem.innerHTML = 
       `<form id="cityForm${city.id}" onsubmit="editCity(event, ${city.id})">
       <input type="hidden" id="${city.id}">
-      <h2>${city.name}
+      <h2>${city.name} <span id="delete${city.id}" onclick="deleteCity(${city.id})">&#128465;</span>
       <input type="text" id="name${city.id}" value="${city.name}">
       <input type="submit"> 
       </h2>
@@ -144,4 +144,16 @@ function addCity(event) {
   cities.push(newCity);
   localStorage.setItem('cities', JSON.stringify(cities));
   displayCities();
+}
+
+function deleteCity(cityId) {
+  const cityIndex = cities.findIndex(city => city.id === cityId);
+
+  const confirmation = confirm(`Voulez-vous vraiment supprimer ${cities[cityIndex].name}?`);
+
+  if(confirmation){
+  cities.splice(cityIndex, 1);
+  localStorage.setItem('cities', JSON.stringify(cities));
+  displayCities();
+  }
 }

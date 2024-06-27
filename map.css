@@ -38,3 +38,7 @@ form {
   width: 50vw;
   margin-bottom: 5px;
 }
+
+[id^=delete]{
+  cursor: pointer
+}
