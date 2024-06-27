@@ -23,27 +23,27 @@ function displayCities() {
   map.innerHTML = '';
 
   cities.forEach(city => {
-  addMarkers(city);
-  createList(city);
-});
+    addMarkers(city);
+    createList(city);
+  });
 
   addCityForm();
 }
 
 function addMarkers(city) {
-    let marker = document.createElement("gmp-advanced-marker");
-    marker.setAttribute("position", `${city.coordinates.lat}, ${city.coordinates.lng}`);
-    marker.setAttribute("title", city.name);
-    map.appendChild(marker);
-    marker.addEventListener("click", (event) => {
-      displayLegend(event, city);
-      }
-    );
+  let marker = document.createElement("gmp-advanced-marker");
+  marker.setAttribute("position", `${city.coordinates.lat}, ${city.coordinates.lng}`);
+  marker.setAttribute("title", city.name);
+  map.appendChild(marker);
+  marker.addEventListener("click", (event) => {
+    displayLegend(event, city);
+  }
+  );
 }
 
 function createList(city) {
   let listItem = document.createElement("div");
-  listItem.innerHTML = 
+  listItem.innerHTML =
     `<form id="cityForm${city.id}" onsubmit="editCity(event, ${city.id})">
     <input type="hidden" id="${city.id}">
     <h2>${city.name} <span id="delete${city.id}" onclick="deleteCity(${city.id})">&#128465;</span>
@@ -70,8 +70,8 @@ function createList(city) {
 }
 
 function addCityForm() {
-  list.innerHTML += 
-  `<h3>Ajouter une ville:</h3>
+  list.innerHTML +=
+    `<h3>Ajouter une ville:</h3>
   <form id="newCityForm" onsubmit="addCity(event)">
       <label for="name">Nom : </label>
       <input type="text" id="name" name="name"> <br>
@@ -85,10 +85,10 @@ function addCityForm() {
       <input type="text" id="population" name="population"> <br>
       <input type="submit"> 
   </form>`;
-  }
+}
 
-function displayLegend(event, city){
-  legend.innerHTML = 
+function displayLegend(event, city) {
+  legend.innerHTML =
     `<h2>${city.name}</h2>
     <p>Population: ${city.population}</p>
     <span>&#10006;</span>`;
@@ -101,12 +101,12 @@ function displayLegend(event, city){
   })
 }
 
-function toggleMap(){ 
+function toggleMap() {
   list.style.display = "none";
   map.style.display = "block";
 }
 
-function toggleList(){
+function toggleList() {
   list.style.display = "block";
   map.style.display = "none";
   legend.style.display = "none";
@@ -117,44 +117,53 @@ function editCity(event, cityId) {
 
   const name = document.getElementById(`name${cityId}`).value;
   const country = document.getElementById(`country${cityId}`).value;
-  const lat = document.getElementById(`lat${cityId}`).value;
-  const lng = document.getElementById(`lng${cityId}`).value;
-  const population = document.getElementById(`population${cityId}`).value;
+  const lat = parseFloat(document.getElementById(`lat${cityId}`).value);
+  const lng = parseFloat(document.getElementById(`lng${cityId}`).value);
+  const population = parseInt(document.getElementById(`population${cityId}`).value);
   const cityIndex = cities.findIndex(city => city.id === cityId);
 
-  cities[cityIndex].name = name;
-  cities[cityIndex].country = country;
-  cities[cityIndex].coordinates.lat = lat;
-  cities[cityIndex].coordinates.lng = lng;
-  cities[cityIndex].population = population;
-
-  localStorage.setItem('cities', JSON.stringify(cities));
-  displayCities();
+  if (!isNaN(lat) && !isNaN(lng) && !isNaN(population)) {
+    cities[cityIndex] = {
+      ...cities[cityIndex],
+      name,
+      country,
+      coordinates: { lat, lng },
+      population
+    };
+    localStorage.setItem('cities', JSON.stringify(cities));
+    displayCities();
+  } else {
+    alert("Les champs population, latitude et longitude doivent être des nombres");
+  }
 }
 
 function addCity(event) {
   event.preventDefault();
   const name = document.getElementById(`name`).value;
   const country = document.getElementById(`country`).value;
-  const lat = document.getElementById(`lat`).value;
-  const lng = document.getElementById(`lng`).value;
-  const population = document.getElementById(`population`).value;
+  const lat = parseFloat(document.getElementById(`lat`).value);
+  const lng = parseFloat(document.getElementById(`lng`).value);
+  const population = parseInt(document.getElementById(`population`).value);
   const newCityId = cities.length > 0 ? Math.max(...cities.map(city => city.id)) + 1 : 1;
 
-  const newCity = {
-    id: newCityId,
-    name: name,
-    country: country,
-    coordinates: {
-      lat: lat,
-      lng: lng
-    },
-    population: population
-  };
+  if (!isNaN(lat) && !isNaN(lng) && !isNaN(population)) {
+    const newCity = {
+      id: newCityId,
+      name: name,
+      country: country,
+      coordinates: {
+        lat: lat,
+        lng: lng
+      },
+      population: population
+    };
 
-  cities.push(newCity);
-  localStorage.setItem('cities', JSON.stringify(cities));
-  displayCities();
+    cities.push(newCity);
+    localStorage.setItem('cities', JSON.stringify(cities));
+    displayCities();
+  } else {
+    alert("Les champs population, latitude et longitude doivent être des nombres");
+  }
 }
 
 function deleteCity(cityId) {
@@ -162,10 +171,10 @@ function deleteCity(cityId) {
 
   const confirmation = confirm(`Voulez-vous vraiment supprimer ${cities[cityIndex].name}?`);
 
-  if(confirmation){
-  cities.splice(cityIndex, 1);
-  localStorage.setItem('cities', JSON.stringify(cities));
-  displayCities();
+  if (confirmation) {
+    cities.splice(cityIndex, 1);
+    localStorage.setItem('cities', JSON.stringify(cities));
+    displayCities();
   }
 }
 
@@ -175,8 +184,8 @@ function geolocation() {
       const userLocation = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
-      } 
-    
+      }
+
       let userMarker = document.createElement("gmp-advanced-marker");
       userMarker.setAttribute("position", `${userLocation.lat}, ${userLocation.lng}`);
       userMarker.setAttribute("title", "Votre position");
