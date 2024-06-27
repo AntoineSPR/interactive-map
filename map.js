@@ -19,7 +19,8 @@ function loadJSON(callback) {
 loadJSON();
 
 function displayCities() {
-  list.innerHTML = '';
+  list.innerHTML = `<h1>Capitales</h1>`;
+
   cities.forEach(city => {
     let marker = document.createElement("gmp-advanced-marker");
     marker.setAttribute("position", `${city.coordinates.lat}, ${city.coordinates.lng}`);
@@ -29,16 +30,16 @@ function displayCities() {
       displayLegend(event, city);
       }
     );
+
     let listItem = document.createElement("div");
     listItem.innerHTML = 
-      `
-      <form id="cityForm${city.id}" onsubmit="handleSubmit(event, ${city.id})">
+      `<form id="cityForm${city.id}" onsubmit="editCity(event, ${city.id})">
       <input type="hidden" id="${city.id}">
       <h2>${city.name}
       <input type="text" id="name${city.id}" value="${city.name}">
       <input type="submit"> 
       </h2>
-      <p>Country: ${city.country}
+      <p>Pays : ${city.country}
       <input type="text" id="country${city.id}" value="${city.country}">
       <input type="submit"> 
       </p>
@@ -50,13 +51,29 @@ function displayCities() {
       <input type="text" id="lng${city.id}" value="${city.coordinates.lng}">
       <input type="submit"> 
       </p>
-      <p>Population: ${city.population}
+      <p>Population : ${city.population}
       <input type="text" id="population${city.id}" value="${city.population}">
       <input type="submit"> 
       </p>
       </form>`;
     list.appendChild(listItem);
   });
+
+  list.innerHTML += 
+  `<h3>Ajouter une ville:</h3>
+  <form id="newCityForm" onsubmit="addCity(event)">
+      <label for="name">Nom : </label>
+      <input type="text" id="name" name="name"> <br>
+      <label for="country">Pays : </label>
+      <input type="text" id="country" name="country"> <br>
+      <label for="lat">Latitude : </label>
+      <input type="text" id="lat" name="lat"> <br>
+      <label for="lng">Longitude : </label>
+      <input type="text" id="lng" name="lng"> <br>
+      <label for="population">Population : </label>
+      <input type="text" id="population" name="population"> <br>
+      <input type="submit"> 
+  </form>`;
 }
 
 function displayLegend(event, city){
@@ -83,7 +100,7 @@ function toggleList(){
   map.style.display = "none";
 }
 
-function handleSubmit(event, cityId) {
+function editCity(event, cityId) {
   event.preventDefault();
 
   const name = document.getElementById(`name${cityId}`).value;
@@ -100,6 +117,30 @@ function handleSubmit(event, cityId) {
   cities[cityIndex].population = population;
 
   localStorage.setItem('cities', JSON.stringify(cities));
-  document.getElementById(`cityForm${cityId}`).reset();
+  displayCities();
+}
+
+function addCity(event) {
+  event.preventDefault();
+  const name = document.getElementById(`name`).value;
+  const country = document.getElementById(`country`).value;
+  const lat = document.getElementById(`lat`).value;
+  const lng = document.getElementById(`lng`).value;
+  const population = document.getElementById(`population`).value;
+  const newCityId = cities.length > 0 ? Math.max(...cities.map(city => city.id)) + 1 : 1;
+
+  const newCity = {
+    id: newCityId,
+    name: name,
+    country: country,
+    coordinates: {
+      lat: lat,
+      lng: lng
+    },
+    population: population
+  };
+
+  cities.push(newCity);
+  localStorage.setItem('cities', JSON.stringify(cities));
   displayCities();
 }
