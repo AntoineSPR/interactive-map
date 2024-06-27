@@ -45,10 +45,9 @@ function displayCities() {
       <input type="submit"> 
       </p>
       <p>Latitude : ${city.coordinates.lat}
-      <input type="text" id="lat${city.id}" value="${city.coordinates.lat}">
-      <input type="submit"> 
-      </p>
-      <p>Longitude : ${city.coordinates.lng}
+      <input type="text" id="lat${city.id}" value="${city.coordinates.lat}"> 
+      <br>
+      Longitude : ${city.coordinates.lng}
       <input type="text" id="lng${city.id}" value="${city.coordinates.lng}">
       <input type="submit"> 
       </p>
