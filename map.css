@@ -33,7 +33,7 @@ gmp-advanced-marker {
   margin: 0;
 }
 
-#cityForm {
+form {
   border: 2px solid black;
   width: 50vw;
   margin-bottom: 5px;

@@ -34,13 +34,26 @@ function displayCities() {
       `
       <form id="cityForm${city.id}" onsubmit="handleSubmit(event, ${city.id})">
       <input type="hidden" id="${city.id}">
-      <h2>${city.name}</h2>
+      <h2>${city.name}
       <input type="text" id="name${city.id}" value="${city.name}">
       <input type="submit"> 
-      <p>Country: ${city.country}</p>
-      <p>Latitude : ${city.coordinates.lat}</p>
-      <p>Longitude : ${city.coordinates.lng}</p>
-      <p>Population: ${city.population}</p>
+      </h2>
+      <p>Country: ${city.country}
+      <input type="text" id="country${city.id}" value="${city.country}">
+      <input type="submit"> 
+      </p>
+      <p>Latitude : ${city.coordinates.lat}
+      <input type="text" id="lat${city.id}" value="${city.coordinates.lat}">
+      <input type="submit"> 
+      </p>
+      <p>Longitude : ${city.coordinates.lng}
+      <input type="text" id="lng${city.id}" value="${city.coordinates.lng}">
+      <input type="submit"> 
+      </p>
+      <p>Population: ${city.population}
+      <input type="text" id="population${city.id}" value="${city.population}">
+      <input type="submit"> 
+      </p>
       </form>`;
     list.appendChild(listItem);
   });
@@ -72,10 +85,20 @@ function toggleList(){
 
 function handleSubmit(event, cityId) {
   event.preventDefault();
+
   const name = document.getElementById(`name${cityId}`).value;
+  const country = document.getElementById(`country${cityId}`).value;
+  const lat = document.getElementById(`lat${cityId}`).value;
+  const lng = document.getElementById(`lng${cityId}`).value;
+  const population = document.getElementById(`population${cityId}`).value;
   const cityIndex = cities.findIndex(city => city.id === cityId);
+
   cities[cityIndex].name = name;
-  console.log(cities[cityIndex]);
+  cities[cityIndex].country = country;
+  cities[cityIndex].coordinates.lat = lat;
+  cities[cityIndex].coordinates.lng = lng;
+  cities[cityIndex].population = population;
+
   localStorage.setItem('cities', JSON.stringify(cities));
   document.getElementById(`cityForm${cityId}`).reset();
   displayCities();
