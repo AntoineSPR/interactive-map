@@ -215,4 +215,5 @@ function toggleAddForm() {
   let form = document.getElementById('newCityForm');
 
   form.style.display = form.style.display !== 'block' ? 'block' : 'none';
+  form.scrollIntoView({ behavior: 'smooth' });
 }
