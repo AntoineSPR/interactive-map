@@ -7,22 +7,21 @@ function createList(city) {
       <button id="delete${city.id}" type="button" onclick="deleteCity(${city.id})">&#128465;</button>
       <button id="edit${city.id}" type="button" onclick="toggleEditForm(${city.id})">Modifier</button>
       <input type="text" id="name${city.id}" value="${city.name}">
-      <input type="submit"> 
       </h2>
       <p>Pays : ${city.country}
       <input type="text" id="country${city.id}" value="${city.country}">
-      <input type="submit"> 
       </p>
       <p>Latitude : ${city.coordinates.lat}
       <input type="text" id="lat${city.id}" value="${city.coordinates.lat}"> 
       <br>
       Longitude : ${city.coordinates.lng}
       <input type="text" id="lng${city.id}" value="${city.coordinates.lng}">
-      <input type="submit"> 
       </p>
       <p>Population : ${city.population}
       <input type="text" id="population${city.id}" value="${city.population}">
-      <input type="submit"> 
+      </p>
+      <p class="submit">
+      <input type="submit" value="Enregistrer les modifications"> 
       </p>
       </form>`;
     list.appendChild(listItem);
@@ -41,8 +40,10 @@ function addCityForm() {
         <label for="lng">Longitude : </label>
         <input type="text" id="lng" name="lng"> <br>
         <label for="population">Population : </label>
-        <input type="text" id="population" name="population"> <br>
-        <input type="submit"> 
+        <input type="text" id="population" name="population">
+        <p class="submit">
+        <input type="submit">
+        </p> 
     </form>`;
 }
 

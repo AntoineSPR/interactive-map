@@ -35,7 +35,7 @@ function toggleMap() {
 }
 
 function toggleList() {
-    list.style.display = "block";
+    list.style.display = "flex";
     map.style.display = "none";
     legend.style.display = "none";
 }
