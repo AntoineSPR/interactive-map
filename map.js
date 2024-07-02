@@ -46,7 +46,9 @@ function createList(city) {
   listItem.innerHTML =
     `<form id="cityForm${city.id}" onsubmit="editCity(event, ${city.id})">
     <input type="hidden" id="${city.id}">
-    <h2>${city.name} <span id="delete${city.id}" onclick="deleteCity(${city.id})">&#128465;</span>
+    <h2>${city.name} 
+    <button id="delete${city.id}" type="button" onclick="deleteCity(${city.id})">&#128465;</button>
+    <button id="edit${city.id}" type="button" onclick="toggleEditForm(${city.id})">Modifier</button>
     <input type="text" id="name${city.id}" value="${city.name}">
     <input type="submit"> 
     </h2>
@@ -196,5 +198,15 @@ function geolocation() {
     });
   } else {
     alert('Votre navigateur ne prend pas en charge la géolocalisation');
+  }
+}
+
+function toggleEditForm(cityId) {
+  let form = document.getElementById(`cityForm${cityId}`);
+  let inputs = form.getElementsByTagName('input');
+
+  for (let i=0; i<inputs.length; i++) {
+    let input = inputs[i];
+    input.style.display = input.style.display !== 'inline-block' ? 'inline-block' : 'none';
   }
 }

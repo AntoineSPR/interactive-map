@@ -57,3 +57,7 @@ form {
 [id^=delete]{
   cursor: pointer
 }
+
+[id^=cityForm] input {
+  display: none;
+}
