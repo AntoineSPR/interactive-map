@@ -73,7 +73,7 @@ function createList(city) {
 
 function addCityForm() {
   list.innerHTML +=
-    `<h3>Ajouter une ville:</h3>
+    `<button id="addCity" type="button" onclick="toggleAddForm()">Ajouter une ville</button>
   <form id="newCityForm" onsubmit="addCity(event)">
       <label for="name">Nom : </label>
       <input type="text" id="name" name="name"> <br>
@@ -209,4 +209,10 @@ function toggleEditForm(cityId) {
     let input = inputs[i];
     input.style.display = input.style.display !== 'inline-block' ? 'inline-block' : 'none';
   }
+}
+
+function toggleAddForm() {
+  let form = document.getElementById('newCityForm');
+
+  form.style.display = form.style.display !== 'block' ? 'block' : 'none';
 }

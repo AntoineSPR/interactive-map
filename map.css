@@ -58,6 +58,7 @@ form {
   cursor: pointer
 }
 
-[id^=cityForm] input {
+[id^=cityForm] input,
+#newCityForm {
   display: none;
 }
