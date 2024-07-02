@@ -15,8 +15,25 @@ function displayLegend(event, city) {
     <p>Population: ${city.population}</p>
     <span>&#10006;</span>`;
   legend.style.display = "block";
-  legend.style.left = event.clientX + "px";
-  legend.style.top = event.clientY + "px";
+
+  let left = event.clientX;
+  let top = event.clientY;
+
+  legend.style.left = left + "px";
+  legend.style.top = top + "px";
+  const legendRect = legend.getBoundingClientRect();
+
+  if (legendRect.right > window.innerWidth) {
+    left -= (legendRect.right - window.innerWidth);
+  }
+
+  if (legendRect.bottom > window.innerHeight) {
+    top -= (legendRect.bottom - window.innerHeight);
+  }
+
+  legend.style.left = left + "px";
+  legend.style.top = top + "px";
+
   let cross = document.querySelector("#legend span");
   cross.addEventListener("click", () => {
     legend.style.display = "none";
